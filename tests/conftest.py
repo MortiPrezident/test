@@ -16,8 +16,8 @@ db — для работы с БД.
 @pytest.fixture
 def app():
     _app = create_app()
-    _app.config['TESTING'] = True
-    _app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite://"
+    _app.config["TESTING"] = True
+    _app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite://"
 
     with _app.app_context():
         _db.create_all()
@@ -25,28 +25,19 @@ def app():
             name="Oleg",
             surname="Kaneman",
             credit_card="88002553535",
-            car_number="a663ue"
-
-    )
+            car_number="a663ue",
+        )
         client_2 = Client(
             name="Oleg_2",
             surname="Kaneman_2",
             credit_card="88010553535",
-            car_number="a613ue"
-
+            car_number="a613ue",
         )
         parking = Parking(
-            address="voronezh",
-            opened=True,
-            count_places=5,
-            count_available_places=2
-
+            address="voronezh", opened=True, count_places=5, count_available_places=2
         )
         client_parking = ClientParking(
-            client_id=1,
-            parking_id=1,
-            time_in=datetime.now()
-
+            client_id=1, parking_id=1, time_in=datetime.now()
         )
         _db.session.add(client)
         _db.session.add(client_2)
@@ -56,6 +47,7 @@ def app():
         yield _app
         _db.session.close()
         _db.drop_all()
+
 
 @pytest.fixture
 def client(app):
