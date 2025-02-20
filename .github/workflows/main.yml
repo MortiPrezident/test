@@ -13,7 +13,7 @@ jobs:
           - name: "Unit tests"
             task: "pytest tests"
           - name: "Mypy type check"
-            task: "mypy ./main --install-types --non-interactive"
+            task: "mypy --no-incremental --cache-dir=/dev/null ./main"
           - name: "Black formatting check"
             task: "black --diff --check main/"
           - name: "Isort check"
