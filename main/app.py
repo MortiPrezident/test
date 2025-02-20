@@ -27,13 +27,12 @@ def create_app():
         query = db.select(Client)
         clients = db.session.execute(query).scalars().all()
         clients_to_json = [client.to_json() for client in clients]
-        response = app.response_class(
+
+        return app.response_class(
             response=json.dumps({"clients": clients_to_json}, indent=4),
             status=200,
             mimetype="application/json",
         )
-
-        return response
 
     @app.route("/clients/<int:client_id>")
     def get_client_by_id(client_id):
@@ -53,7 +52,10 @@ def create_app():
         credit_card = data.get("credit_card")
         car_number = data.get("car_number")
         client = Client(
-            name=name, surname=surname, credit_card=credit_card, car_number=car_number
+            name=name,
+            surname=surname,
+            credit_card=credit_card,
+            car_number=car_number
         )
         db.session.add(client)
         db.session.commit()
@@ -91,12 +93,15 @@ def create_app():
         if parking.opened and parking.count_available_places >= 1:
             parking.count_available_places -= 1
             client_parking = ClientParking(
-                client_id=client_id, parking_id=parking_id, time_in=datetime.now()
+                client_id=client_id,
+                parking_id=parking_id,
+                time_in=datetime.now()
             )
             db.session.add(client_parking)
             db.session.commit()
             return (
-                f"клиент с id = {client_id}, занял место на парковке {parking_id}",
+                f"клиент с id = {client_id}, "
+                f"занял место на парковке {parking_id}",
                 201,
             )
         else:
@@ -108,14 +113,18 @@ def create_app():
         data = request.get_json()
         client_id = data.get("client_id")
         parking_id = data.get("parking_id")
-        query = db.select(ClientParking).where(ClientParking.client_id == client_id)
+        query = (db.select(ClientParking).
+                 where(ClientParking.client_id == client_id))
         client_parking = db.session.execute(query).scalar_one_or_none()
 
         if client_parking.client.credit_card:
             db.session.delete(client_parking)
             db.session.commit()
-            return f"клиент id = {client_id} выехал с парковки id = {parking_id}", 204
+            return (f"клиент id = {client_id} "
+                    f"выехал с парковки id = {parking_id}"), 204
         else:
-            return f"не выпускаем клиента id = {client_id} с парковки id = {parking_id} так как он не оплатил парковку "
+            return (f"не выпускаем клиента id = {client_id} "
+                    f"с парковки id = {parking_id} "
+                    f"так как он не оплатил парковку ")
 
     return app
