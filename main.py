@@ -40,6 +40,3 @@ async def recipe_detail(recipe_id: int) -> models.Recipe:
     return recipe
 
 
-# GET /recipes — получить список всех рецептов;
-# GET /recipes/{recipe_id} — получить детальную информацию о конкретном рецепте;
-# POST /recipes — создать новый рецепт.
