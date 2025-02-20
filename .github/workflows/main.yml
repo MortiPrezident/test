@@ -12,19 +12,19 @@ jobs:
           - name: "Unit tests"
             task: "pytest tests"
           - name: "Mypy type check"
-            task: "mypy main/"
+            task: "mypy ./main"
           - name: "Black formatting check"
             task: "black --diff --check main/"
           - name: "Isort check"
-            task: "isort --check-only --diff main/"
+            task: "isort --check-only --diff ./main"
           - name: "Flake8 linting"
-            task: "flake8 main/"
+            task: "flake8 ./main"
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: pip install --root-user-action=ignore  -r requirements.txt
 
       - name: Run ${{ matrix.name }}
         run: ${{ matrix.task }}
