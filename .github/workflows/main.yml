@@ -4,6 +4,7 @@ on: push
 jobs:
   test:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     container:
       image: python:3.12
     strategy:
@@ -12,7 +13,7 @@ jobs:
           - name: "Unit tests"
             task: "pytest tests"
           - name: "Mypy type check"
-            task: "mypy ./main"
+            task: "mypy --no-incremental --cache-dir=/dev/null ./main"
           - name: "Black formatting check"
             task: "black --diff --check main/"
           - name: "Isort check"
@@ -24,7 +25,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Install dependencies
-        run: pip install --root-user-action=ignore  -r requirements.txt
+        run: pip install -r requirements.txt
 
       - name: Run ${{ matrix.name }}
         run: ${{ matrix.task }}
