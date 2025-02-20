@@ -1,0 +1,30 @@
+name: CI
+
+on: push
+
+jobs:
+  test:
+    container:
+      image: python:3.12
+    strategy:
+      matrix:
+        include:
+          - name: "Unit tests"
+            task: "pytest tests"
+          - name: "Mypy type check"
+            task: "mypy src/"
+          - name: "Black formatting check"
+            task: "black --diff --check src/"
+          - name: "Isort check"
+            task: "isort --check-only --diff src/"
+          - name: "Flake8 linting"
+            task: "flake8 src"
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run ${{ matrix.name }}
+        run: ${{ matrix.task }}
