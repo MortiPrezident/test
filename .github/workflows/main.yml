@@ -3,6 +3,7 @@ name: CI
 on: push
 jobs:
   test:
+    runs-on: ubuntu-latest
     container:
       image: python:3.12
     strategy:
@@ -11,13 +12,13 @@ jobs:
           - name: "Unit tests"
             task: "pytest tests"
           - name: "Mypy type check"
-            task: "mypy src/"
+            task: "mypy"
           - name: "Black formatting check"
-            task: "black --diff --check src/"
+            task: "black --diff --check"
           - name: "Isort check"
-            task: "isort --check-only --diff src/"
+            task: "isort --check-only --diff"
           - name: "Flake8 linting"
-            task: "flake8 src"
+            task: "flake8"
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
