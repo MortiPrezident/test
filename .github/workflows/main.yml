@@ -12,13 +12,13 @@ jobs:
           - name: "Unit tests"
             task: "pytest tests"
           - name: "Mypy type check"
-            task: "mypy"
+            task: "mypy main/"
           - name: "Black formatting check"
-            task: "black --diff --check"
+            task: "black --diff --check main/"
           - name: "Isort check"
-            task: "isort --check-only --diff"
+            task: "isort --check-only --diff main/"
           - name: "Flake8 linting"
-            task: "flake8"
+            task: "flake8 main/"
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
