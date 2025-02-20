@@ -1,8 +1,8 @@
-from datetime import datetime
 import json
+from datetime import datetime
 
-from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, jsonify, request
+from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 

@@ -1,6 +1,5 @@
-from typing import Dict, Any
-
 from test.main.app import db
+from typing import Any, Dict
 
 
 class Client(db.Model):
