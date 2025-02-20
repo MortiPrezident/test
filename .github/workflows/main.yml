@@ -17,9 +17,9 @@ jobs:
           - name: "Black formatting check"
             task: "black --diff --check main/"
           - name: "Isort check"
-            task: "isort --check-only --diff ./main"
+            task: "isort --profile=black --check-only --diff ./main"
           - name: "Flake8 linting"
-            task: "flake8 ./main"
+            task: "flake8 ./main --max-line-length=88 --extend-ignore=E203,W503"
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
