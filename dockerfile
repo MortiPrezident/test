@@ -6,8 +6,8 @@ COPY requirements.txt ./requirements.txt
 
 ENV PYTHONPATH=/home
 RUN pip install -r requirements.txt
-COPY ./main ./main
-COPY ./tests ./tests
+COPY . .
+
 
 
 CMD ["python", "main/main.py"]
