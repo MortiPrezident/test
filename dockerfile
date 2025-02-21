@@ -3,8 +3,8 @@ COPY requirements.txt ./requirements.txt
 workdir /home
 
 RUN pip install -r requirements.txt
-COPY . .
+COPY . ./test
 ENV PYTHONPATH=/home
 
 
-CMD ["python", "test/main/main.py"]
+CMD ["python", "-m" "test/main/main"]
