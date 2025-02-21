@@ -60,6 +60,10 @@ def create_app():
         client_json = client.to_json()
         return jsonify({"new_client": client_json}), 201
 
+    @app.route("/hello", methods=["GET"])
+    def hello():
+        return "<h1>ты научился автодеплою. Красава!</h1>"
+
     @app.route("/parking", methods=["POST"])
     def post_parking():
         data = request.get_json()
