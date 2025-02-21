@@ -4,7 +4,7 @@ workdir /home
 
 RUN pip install -r requirements.txt
 COPY . ./test
-ENV PYTHONPATH=/home
+RUN export PYTHONPATH=/home && echo "PYTHONPATH set to $PYTHONPATH"
 
 
 CMD ["python", "test/main/main.py"]
