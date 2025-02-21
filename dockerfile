@@ -4,7 +4,7 @@ COPY requirements.txt ./requirements.txt
 
 RUN pip install -r requirements.txt
 COPY ./main ./test/main
-COPY ./test ./test/tests
+COPY ./tests ./test/tests
 ENV PYTHONPATH=/app
 
 
