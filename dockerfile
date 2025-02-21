@@ -7,4 +7,4 @@ COPY . ./test
 ENV PYTHONPATH=/app
 
 
-CMD ["python", "-m", "test/main/main"]
+CMD ["python", "-m", "test.main.main"]
