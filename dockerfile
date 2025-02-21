@@ -10,4 +10,4 @@ COPY ./main ./main
 COPY ./tests ./tests
 
 
-CMD ["python", "main.py"]
+CMD ["python", "main/main.py"]
