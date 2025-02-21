@@ -10,6 +10,7 @@ def deploy(ctx):
        user="root",
        connect_kwargs={"key_filename": "{key_path}".format(key_path=key_path)}
    ) as c:
-       with c.cd("/home/"):
-           c.run("ls -la")
-           c.run("uname -a")
+       with c.cd("/home/test"):
+           c.run("docker-compose down")
+           c.run("git pull origin master --rebase")
+           c.run("docker compose up --build -d")
