@@ -8,7 +8,7 @@ def deploy(ctx):
    with Connection(
        os.environ["HOST"],
        user=os.environ["USER_NAME"],
-       connect_kwargs={"key_filename": os.environ["PRIVATE_KEY"]}
+       connect_kwargs={"key_filename": key_path}
    ) as c:
        with c.cd("/home/test"):
            c.run("docker compose down")
