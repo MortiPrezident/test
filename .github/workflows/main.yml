@@ -46,5 +46,5 @@ jobs:
         run: pip install fabric
 
       - name: Run deployment
-        run: fab -f fabric/fabfile.py deploy
-    environment: production
+        run: fab deploy
+    environment: auto_deploy
